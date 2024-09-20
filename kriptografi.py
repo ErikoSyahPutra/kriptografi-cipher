@@ -228,37 +228,77 @@ def create_gui():
     root = tk.Tk()
     root.title("Cipher Tool")
 
+    # Menyesuaikan ukuran jendela awal
+    root.geometry("600x400")
+
+    # Mengatur warna latar belakang
+    root.configure(bg="#f0f0f0")
+
+    # Membuat grid utama fleksibel
+    root.grid_columnconfigure(0, weight=1)
+    root.grid_rowconfigure(0, weight=1)
+
+    # Frame utama untuk membungkus semua elemen
+    main_frame = tk.Frame(root, bg="#f0f0f0")
+    main_frame.grid(row=0, column=0, sticky="nsew", padx=20, pady=20)
+
+    # Membuat grid pada main_frame juga fleksibel
+    main_frame.grid_columnconfigure(0, weight=1)
+    main_frame.grid_columnconfigure(1, weight=1)
+    main_frame.grid_rowconfigure(0, weight=1)
+    main_frame.grid_rowconfigure(1, weight=1)
+    main_frame.grid_rowconfigure(2, weight=1)
+    main_frame.grid_rowconfigure(3, weight=1)
+
+    # Frame untuk Input
+    input_frame = tk.Frame(main_frame, bg="#d3d3d3", padx=10, pady=10)
+    input_frame.grid(row=0, column=0, columnspan=2, sticky="nsew", padx=10, pady=10)
+
+    # Membuat input frame lebih fleksibel
+    input_frame.grid_columnconfigure(1, weight=1)
+
     # Label dan input untuk pesan
-    tk.Label(root, text="Input Message:").grid(row=0, column=0)
-    message_input = tk.Entry(root, width=50)
-    message_input.grid(row=0, column=1)
+    tk.Label(input_frame, text="Input Message:", bg="#d3d3d3", font=("Helvetica", 12)).grid(row=0, column=0, pady=5, sticky="e")
+    message_input = tk.Entry(input_frame, font=("Helvetica", 10))
+    message_input.grid(row=0, column=1, pady=5, sticky="ew")
 
     # Tombol untuk upload file
-    tk.Button(root, text="Upload File", command=upload_file_action).grid(row=0, column=2)
+    tk.Button(input_frame, text="Upload File", command=upload_file_action, bg="#1f77b4", fg="white", font=("Helvetica", 10), padx=5, pady=5).grid(row=0, column=2, padx=10, sticky="w")
 
     # Label dan input untuk kunci
-    tk.Label(root, text="Key:").grid(row=1, column=0)
-    key_input = tk.Entry(root, width=50, show='*')  # Menambahkan show='*' untuk menyembunyikan input
-    key_input.grid(row=1, column=1)
+    tk.Label(input_frame, text="Key:", bg="#d3d3d3", font=("Helvetica", 12)).grid(row=1, column=0, pady=5, sticky="e")
+    key_input = tk.Entry(input_frame, font=("Helvetica", 10), show='*')  # Menambahkan show='*' untuk menyembunyikan input
+    key_input.grid(row=1, column=1, pady=5, sticky="ew")
 
+    # Frame untuk opsi Cipher
+    options_frame = tk.Frame(main_frame, bg="#d3d3d3", padx=10, pady=10)
+    options_frame.grid(row=1, column=0, columnspan=2, sticky="nsew", padx=10, pady=10)
+
+    # Membuat options frame lebih fleksibel
+    options_frame.grid_columnconfigure(1, weight=1)
 
     # Opsi untuk memilih cipher
     cipher_var = tk.StringVar(root)
     cipher_var.set("Vigenere")  # Default value
-    tk.Label(root, text="Choose Cipher:").grid(row=2, column=0)
-    cipher_menu = tk.OptionMenu(root, cipher_var, "Vigenere", "Playfair", "Hill")
-    cipher_menu.grid(row=2, column=1)
+    tk.Label(options_frame, text="Choose Cipher:", bg="#d3d3d3", font=("Helvetica", 12)).grid(row=0, column=0, pady=5, sticky="e")
+    cipher_menu = tk.OptionMenu(options_frame, cipher_var, "Vigenere", "Playfair", "Hill")
+    cipher_menu.config(bg="#ff7f0e", fg="white", font=("Helvetica", 10))
+    cipher_menu.grid(row=0, column=1, pady=5, sticky="ew")
+
+    # Frame untuk tombol aksi (Encrypt dan Decrypt)
+    action_frame = tk.Frame(main_frame, bg="#f0f0f0")
+    action_frame.grid(row=2, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
 
     # Tombol enkripsi dan dekripsi
-    tk.Button(root, text="Encrypt", command=encrypt_action).grid(row=3, column=0)
-    tk.Button(root, text="Decrypt", command=decrypt_action).grid(row=3, column=1)
+    tk.Button(action_frame, text="Encrypt", command=encrypt_action, bg="#2ca02c", fg="white", font=("Helvetica", 12), padx=10, pady=5).grid(row=0, column=0, padx=10)
+    tk.Button(action_frame, text="Decrypt", command=decrypt_action, bg="#d62728", fg="white", font=("Helvetica", 12), padx=10, pady=5).grid(row=0, column=1, padx=10)
 
     # Tombol untuk menyimpan hasil ke file
-    tk.Button(root, text="Save to File", command=lambda: save_result_to_file(result_label.cget("text")[8:])).grid(row=3, column=2)
+    tk.Button(action_frame, text="Save to File", command=lambda: save_result_to_file(result_label.cget("text")[8:]), bg="#1f77b4", fg="white", font=("Helvetica", 10), padx=10, pady=5).grid(row=0, column=2, padx=10)
 
     # Label untuk menampilkan hasil
-    result_label = tk.Label(root, text="Result: ")
-    result_label.grid(row=4, column=0, columnspan=3)
+    result_label = tk.Label(main_frame, text="Result: ", bg="#f0f0f0", font=("Helvetica", 12), wraplength=500)
+    result_label.grid(row=3, column=0, columnspan=2, pady=10, sticky="nsew")
 
     root.mainloop()
 

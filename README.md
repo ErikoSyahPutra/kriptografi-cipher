@@ -1,7 +1,7 @@
-# Cipher Tool
+# Dokumentasi Penggunaan Cipher Tool
 
 ## Deskripsi
-Crypto Tool adalah program berbasis GUI yang memungkinkan pengguna untuk melakukan enkripsi dan dekripsi menggunakan tiga metode cipher: Vigenere, Playfair, dan Hill Cipher. Program ini memungkinkan pengguna untuk memasukkan teks secara langsung atau mengunggah file teks, serta menyimpan hasil ke dalam file teks.
+Cipher Tool adalah program berbasis GUI yang memungkinkan pengguna untuk melakukan enkripsi dan dekripsi menggunakan tiga metode cipher: Vigenere, Playfair, dan Hill Cipher. Program ini memungkinkan pengguna untuk memasukkan teks secara langsung atau mengunggah file teks, serta menyimpan hasil ke dalam file teks.
 
 ## Fitur
 - Enkripsi dan dekripsi menggunakan:
@@ -26,8 +26,40 @@ Crypto Tool adalah program berbasis GUI yang memungkinkan pengguna untuk melakuk
 4. Jalankan program dengan perintah
     ``` bash
     python nama_file.py
-    Gantilah 'nama_file.py' dengan nama file sumber program Anda.
+Gantilah 'nama_file.py' dengan nama file sumber program Anda.
 
 ## Penggunaan
-1. 
+1. Input Pesan: Masukkan pesan yang ingin dienkripsi di kolom "Input Message". Anda juga dapat mengunggah file teks dengan mengklik tombol "Upload File"
+2. Input Kunci: Masukkan kunci untuk enkripsi/dekripsi di kolom "Key". Pastikan kunci memiliki panjang minimal 12 karakter.
+3. Pilih Cipher: Pilih metode cipher yang ingin digunakan dari dropdown menu "Choose Cipher".
+4. Enkripsi/Dekripsi: Klik tombol "Encrypt" untuk mengenkripsi pesan atau "Decrypt" untuk mendekripsi.
+5. Simpan Hasil: Klik tombol "Save to File" untuk menyimpan hasil enkripsi/dekripsi ke dalam file `.txt`.
 
+## Contoh Penggunaan Program
+
+### Encrypt/Decrypt - Vigenere
+(![ecnrypt-vigenere](image/vigenere/encrypt-vigenere.jpg))
+<p>Pada gambar diatas terdapat plainteks "saya suka belajar kriptografi" dan dienkripsi menggunakan vigenere cipher dengan hasil yang tertera pada gambar diatas</p>
+<br>
+
+(![decrypt-vigenere](image/vigenere/decrypt-vigenere.jpg))
+<p>Pada gambar diatas menunjukkan kode enkripsi yang akan di dekripsi menggunakan vigenere cipher</p>
+<br>
+
+### Encrypt/Decrypt - Playfair
+![encrypt-playfair](image/playfair/encrypt-playfair.jpg)
+<p>Pada gambar diatas terdapat plainteks "saya suka belajar kriptografi" dan dienkripsi menggunakan playfair cipher dengan hasil yang tertera pada gambar diatas</p>
+<br>
+
+![decrypt-playfair](image/playfair/decrypt-playfair.jpg)
+<p>Pada gambar diatas menunjukkan kode enkripsi yang akan di dekripsi menggunakan playfair cipher</p>
+<br>
+
+### Encrypt/Decrypt - Hill
+![encrypt-hill](image/hill/encrypt-hill.jpg)
+<p>Pada gambar diatas terdapat plainteks "saya suka belajar kriptografi" dan dienkripsi menggunakan hill cipher dengan hasil yang tertera pada gambar diatas</p>
+<br>
+
+![decrypt-hill](image/hill/decrypt-hill.jpg)
+<p>Pada gambar diatas terdapat plainteks "saya suka belajar kriptografi" dan dienkripsi menggunakan hill cipher dengan hasil yang tertera pada gambar diatas</p>
+<br>
