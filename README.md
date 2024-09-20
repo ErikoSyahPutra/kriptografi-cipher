@@ -38,11 +38,11 @@ Gantilah 'nama_file.py' dengan nama file sumber program Anda.
 ## Contoh Penggunaan Program
 
 ### Encrypt/Decrypt - Vigenere
-(![ecnrypt-vigenere](image/vigenere/encrypt-vigenere.jpg))
+![ecnrypt-vigenere](image/vigenere/encrypt-vigenere.jpg)
 <p>Pada gambar diatas terdapat plainteks "saya suka belajar kriptografi" dan dienkripsi menggunakan vigenere cipher dengan hasil yang tertera pada gambar diatas</p>
 <br>
 
-(![decrypt-vigenere](image/vigenere/decrypt-vigenere.jpg))
+![decrypt-vigenere](image/vigenere/decrypt-vigenere.jpg)
 <p>Pada gambar diatas menunjukkan kode enkripsi yang akan di dekripsi menggunakan vigenere cipher</p>
 <br>
 
