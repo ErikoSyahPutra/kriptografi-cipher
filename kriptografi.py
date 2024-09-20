@@ -226,7 +226,7 @@ def create_gui():
     global message_input, key_input, result_label, cipher_var
 
     root = tk.Tk()
-    root.title("Crypto Tool")
+    root.title("Cipher Tool")
 
     # Label dan input untuk pesan
     tk.Label(root, text="Input Message:").grid(row=0, column=0)
