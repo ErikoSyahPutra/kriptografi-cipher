@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import numpy as np
 
-# Fungsi untuk Vigenere Cipher
 def vigenere_encrypt(plaintext, key):
     key = key.upper()
     plaintext = plaintext.upper()
@@ -25,7 +24,6 @@ def vigenere_decrypt(ciphertext, key):
             plaintext += ciphertext[i]
     return plaintext
 
-# Fungsi untuk Playfair Cipher
 def create_playfair_matrix(key):
     key = key.upper().replace('J', 'I')
     matrix = []
@@ -108,13 +106,12 @@ def find_index_playfair(matrix, char):
             return i * 5 + row.index(char)
     return -1
 
-# Fungsi Hill Cipher
 def hill_encrypt(plaintext, key):
     key_matrix = np.array(key).reshape(2, 2)
     plaintext = plaintext.upper().replace(' ', '')
     
     if len(plaintext) % 2 != 0:
-        plaintext += 'X'  # Tambahkan 'X' jika panjang plaintext ganjil
+        plaintext += 'X' 
 
     ciphertext = ''
     for i in range(0, len(plaintext), 2):
@@ -128,13 +125,10 @@ def hill_decrypt(ciphertext, key):
     key_matrix = np.array(key).reshape(2, 2)
     determinant = int(np.round(np.linalg.det(key_matrix))) % 26
     
-    # Mencari invers determinan modulo 26
     inv_determinant = pow(determinant, -1, 26)
     
-    # Membuat matriks adjugate
     adjugate_matrix = np.round(determinant * np.linalg.inv(key_matrix)).astype(int) % 26
 
-    # Menghitung matriks invers kunci
     inv_key_matrix = (inv_determinant * adjugate_matrix) % 26
 
     plaintext = ''
@@ -143,14 +137,12 @@ def hill_decrypt(ciphertext, key):
         decrypted_vector = np.dot(inv_key_matrix, vector) % 26
         plaintext += chr(int(decrypted_vector[0]) + 65) + chr(int(decrypted_vector[1]) + 65)
 
-    # Jika 'X' ditambahkan saat enkripsi, hapus hanya jika ada di akhir
     if plaintext.endswith('X'):
         plaintext = plaintext[:-1]
 
     return plaintext
 
 
-# Fungsi untuk membuka file dan mengisi input pesan
 def open_file():
     file_path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt")])
     if file_path:
@@ -159,7 +151,6 @@ def open_file():
             return content
     return ""
 
-# Fungsi untuk menyimpan hasil ke dalam file .txt
 def save_result_to_file(result):
     file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt")])
     if file_path:
@@ -167,18 +158,15 @@ def save_result_to_file(result):
             file.write(result)
         messagebox.showinfo("Success", "Result saved to file!")
 
-# Fungsi untuk menampilkan hasil
 def show_result(result):
     result_label.config(text="Result: " + result)
 
-# Fungsi validasi kunci
 def validate_key(key):
     if len(key) < 12:
         messagebox.showerror("Error", "Key must be at least 12 characters long!")
         return False
     return True
 
-# Fungsi untuk memilih dan menjalankan enkripsi
 def encrypt_action():
     cipher = cipher_var.get()
     message = message_input.get()
@@ -190,13 +178,12 @@ def encrypt_action():
         elif cipher == "Playfair":
             result = playfair_encrypt(message, key)
         elif cipher == "Hill":
-            key_matrix = [3, 3, 2, 5]  # Contoh kunci untuk Hill Cipher
+            key_matrix = [3, 3, 2, 5]
             result = hill_encrypt(message, key_matrix)
         else:
             result = "Invalid cipher choice"
         show_result(result)
 
-# Fungsi untuk memilih dan menjalankan dekripsi
 def decrypt_action():
     cipher = cipher_var.get()
     message = message_input.get()
@@ -208,41 +195,34 @@ def decrypt_action():
         elif cipher == "Playfair":
             result = playfair_decrypt(message, key)
         elif cipher == "Hill":
-            key_matrix = [3, 3, 2, 5]  # Contoh kunci untuk Hill Cipher
+            key_matrix = [3, 3, 2, 5]
             result = hill_decrypt(message, key_matrix)
         else:
             result = "Invalid cipher choice"
         show_result(result)
 
-# Fungsi untuk mengisi input dari file
 def upload_file_action():
     content = open_file()
     if content:
         message_input.delete(0, tk.END)
         message_input.insert(0, content)
 
-# Fungsi untuk menampilkan antarmuka
 def create_gui():
     global message_input, key_input, result_label, cipher_var
 
     root = tk.Tk()
     root.title("Cipher Tool")
 
-    # Menyesuaikan ukuran jendela awal
     root.geometry("600x400")
 
-    # Mengatur warna latar belakang
     root.configure(bg="#f0f0f0")
 
-    # Membuat grid utama fleksibel
     root.grid_columnconfigure(0, weight=1)
     root.grid_rowconfigure(0, weight=1)
 
-    # Frame utama untuk membungkus semua elemen
     main_frame = tk.Frame(root, bg="#f0f0f0")
     main_frame.grid(row=0, column=0, sticky="nsew", padx=20, pady=20)
 
-    # Membuat grid pada main_frame juga fleksibel
     main_frame.grid_columnconfigure(0, weight=1)
     main_frame.grid_columnconfigure(1, weight=1)
     main_frame.grid_rowconfigure(0, weight=1)
@@ -250,53 +230,42 @@ def create_gui():
     main_frame.grid_rowconfigure(2, weight=1)
     main_frame.grid_rowconfigure(3, weight=1)
 
-    # Frame untuk Input
     input_frame = tk.Frame(main_frame, bg="#d3d3d3", padx=10, pady=10)
     input_frame.grid(row=0, column=0, columnspan=2, sticky="nsew", padx=10, pady=10)
 
-    # Membuat input frame lebih fleksibel
     input_frame.grid_columnconfigure(1, weight=1)
 
-    # Label dan input untuk pesan
     tk.Label(input_frame, text="Input Message:", bg="#d3d3d3", font=("Helvetica", 12)).grid(row=0, column=0, pady=5, sticky="e")
     message_input = tk.Entry(input_frame, font=("Helvetica", 10))
     message_input.grid(row=0, column=1, pady=5, sticky="ew")
 
-    # Tombol untuk upload file
     tk.Button(input_frame, text="Upload File", command=upload_file_action, bg="#1f77b4", fg="white", font=("Helvetica", 10), padx=5, pady=5).grid(row=0, column=2, padx=10, sticky="w")
 
-    # Label dan input untuk kunci
     tk.Label(input_frame, text="Key:", bg="#d3d3d3", font=("Helvetica", 12)).grid(row=1, column=0, pady=5, sticky="e")
-    key_input = tk.Entry(input_frame, font=("Helvetica", 10), show='*')  # Menambahkan show='*' untuk menyembunyikan input
+    key_input = tk.Entry(input_frame, font=("Helvetica", 10), show='*')  
     key_input.grid(row=1, column=1, pady=5, sticky="ew")
 
-    # Frame untuk opsi Cipher
+  
     options_frame = tk.Frame(main_frame, bg="#d3d3d3", padx=10, pady=10)
     options_frame.grid(row=1, column=0, columnspan=2, sticky="nsew", padx=10, pady=10)
 
-    # Membuat options frame lebih fleksibel
     options_frame.grid_columnconfigure(1, weight=1)
 
-    # Opsi untuk memilih cipher
     cipher_var = tk.StringVar(root)
-    cipher_var.set("Vigenere")  # Default value
+    cipher_var.set("Vigenere")  
     tk.Label(options_frame, text="Choose Cipher:", bg="#d3d3d3", font=("Helvetica", 12)).grid(row=0, column=0, pady=5, sticky="e")
     cipher_menu = tk.OptionMenu(options_frame, cipher_var, "Vigenere", "Playfair", "Hill")
     cipher_menu.config(bg="#ff7f0e", fg="white", font=("Helvetica", 10))
     cipher_menu.grid(row=0, column=1, pady=5, sticky="ew")
 
-    # Frame untuk tombol aksi (Encrypt dan Decrypt)
     action_frame = tk.Frame(main_frame, bg="#f0f0f0")
     action_frame.grid(row=2, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
 
-    # Tombol enkripsi dan dekripsi
     tk.Button(action_frame, text="Encrypt", command=encrypt_action, bg="#2ca02c", fg="white", font=("Helvetica", 12), padx=10, pady=5).grid(row=0, column=0, padx=10)
     tk.Button(action_frame, text="Decrypt", command=decrypt_action, bg="#d62728", fg="white", font=("Helvetica", 12), padx=10, pady=5).grid(row=0, column=1, padx=10)
 
-    # Tombol untuk menyimpan hasil ke file
     tk.Button(action_frame, text="Save to File", command=lambda: save_result_to_file(result_label.cget("text")[8:]), bg="#1f77b4", fg="white", font=("Helvetica", 10), padx=10, pady=5).grid(row=0, column=2, padx=10)
 
-    # Label untuk menampilkan hasil
     result_label = tk.Label(main_frame, text="Result: ", bg="#f0f0f0", font=("Helvetica", 12), wraplength=500)
     result_label.grid(row=3, column=0, columnspan=2, pady=10, sticky="nsew")
 

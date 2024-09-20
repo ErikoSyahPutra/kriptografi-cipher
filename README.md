@@ -13,7 +13,7 @@ Cipher Tool adalah program berbasis GUI yang memungkinkan pengguna untuk melakuk
 - Hasil enkripsi dan dekripsi dapat disimpan ke dalam file `.txt`.
 
 ## Persyaratan
-- Python 3.x
+- `Python 3.x`
 - Modul `numpy`
 - Modul `tkinter`
 
